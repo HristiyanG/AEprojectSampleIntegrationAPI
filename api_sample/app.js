@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 const express = require("express");
 const app = express();
 const { 
@@ -6,12 +7,12 @@ const {
 } = require('./client');
 const contractSource = '../contracts/boilerplatePlayground.aes'
 let instance;
-
+const amountToFund = 13312552
 const AeprojectDeploy = require('./deployer');
+const PORT = 3000
 
 app.get("/api/:address", async (req, res, next) => {
 
-    const amountToFund = 13312552
     let address = req.params.address;
     
     instance = await getDeployedInstance(fs.readFileSync(contractSource, 'utf-8'))
@@ -31,7 +32,7 @@ app.get("/api/:address", async (req, res, next) => {
 });
 
 app.get("/deployer/:address", async (req, res, next) => {
-    const amountToFund = 13312552
+    
     let address = req.params.address;
 
     instance = await AeprojectDeploy(contractSource)
@@ -49,6 +50,6 @@ app.get("/deployer/:address", async (req, res, next) => {
 
 });
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
