@@ -1,0 +1,14 @@
+payable contract Identity =
+    record state = { amounts : map(address, int) }
+
+    stateful entrypoint init() = {amounts = {} }
+
+    payable stateful entrypoint fundBeneficiary() =
+        put(state{amounts[Call.caller] = Call.value})
+
+    payable entrypoint balanceOf(beneficiary: address) =
+        state.amounts[beneficiary]
+
+    entrypoint getAddress() =
+        Call.caller
+
