@@ -21,8 +21,6 @@ app.get("/api/:address", async (req, res, next) => {
     await instance.methods.fundBeneficiary({ amount: amountToFund })
 
     let resut = await instance.methods.balanceOf(address)
-    
-    
 
     res.json({
         result: resut.decodedResult,
@@ -41,7 +39,6 @@ app.get("/deployer/:address", async (req, res, next) => {
     await instance.fundBeneficiary({ amount: amountToFund })
 
     let resut = await instance.balanceOf(address)
-
     
     res.json({
         result: resut.decodedResult,
