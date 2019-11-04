@@ -6,7 +6,7 @@ payable contract Identity =
     payable stateful entrypoint fundBeneficiary() =
         put(state{amounts[Call.caller] = Call.value})
 
-    payable entrypoint balanceOf(beneficiary: address) =
+    entrypoint balanceOf(beneficiary: address) =
         state.amounts[beneficiary]
 
     entrypoint getAddress() =
